@@ -39,7 +39,7 @@
         });
 
         function writeToFile(studentId, conductLevel) {
-            var fs = new FileSystem();
+            var fs = new FileSystem(json);
             var fileHandle = fs.createFile('conductstorage');
             var fileWriter = new FileWriter(fileHandle);
 
