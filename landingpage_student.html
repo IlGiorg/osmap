@@ -16,37 +16,36 @@
             try {
                 var studentUsername = ''; // You need to retrieve the username from sessionStorage
 
-                // Read from conductstorage file
-                readFromFile(studentUsername);
+                // Fetch the conduct level data from the JSON file
+                fetch('https://raw.githubusercontent.com/yourusername/yourrepository/main/consequences.json')
+                    .then(response => response.json())
+                    .then(data => {
+                        var conductLevel = findConductLevel(data, studentUsername);
+                        if (conductLevel) {
+                            document.getElementById('conductLevel').textContent = conductLevel;
+                        } else {
+                            document.getElementById('conductLevel').textContent = 'No conduct level set';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error fetching consequences data:', error);
+                        document.getElementById('conductLevel').textContent = 'Error fetching conduct level';
+                    });
             } catch (error) {
                 console.error('Error retrieving conduct level:', error);
+                document.getElementById('conductLevel').textContent = 'Error retrieving conduct level';
             }
         }
 
-        function readFromFile(studentUsername) {
-            var fs = new FileSystem();
-            var fileHandle = fs.openFile('conductstorage');
-            var fileReader = new FileReader(fileHandle);
-
-            fileReader.onload = function(event) {
-                var lines = event.target.result.split('\n');
-                for (var i = 0; i < lines.length; i++) {
-                    var line = lines[i];
-                    var parts = line.split(':');
-                    if (parts.length === 2 && parts[0] === studentUsername) {
-                        var conductLevel = parts[1];
-                        document.getElementById('conductLevel').textContent = conductLevel;
-                        return; // Exit the loop once conduct level is found
-                    }
+        // Function to find conduct level based on student username
+        function findConductLevel(data, studentUsername) {
+            var consequences = data.consequences;
+            for (var i = 0; i < consequences.length; i++) {
+                if (consequences[i].studentId === studentUsername) {
+                    return consequences[i].consequence;
                 }
-                document.getElementById('conductLevel').textContent = 'No conduct level set';
-            };
-
-            fileReader.onerror = function() {
-                document.getElementById('conductLevel').textContent = 'Error reading conduct level';
-            };
-
-            fileReader.readAsText();
+            }
+            return null; // Return null if conduct level not found
         }
 
         // Call the function when the page loads
