@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portal</title>
+</head>
+<body>
+    <h2>Student Portal</h2>
+    <h3>Your Conduct Level:</h3>
+    <p id="conductLevel"></p>
+
+    <script>
+        // Function to retrieve conduct level based on student credentials
+        function getStudentConductLevel() {
+            try {
+                var studentUsername = ''; // You need to retrieve the username from sessionStorage
+
+                // Read from conductstorage file
+                readFromFile(studentUsername);
+            } catch (error) {
+                console.error('Error retrieving conduct level:', error);
+            }
+        }
+
+        function readFromFile(studentUsername) {
+            var fs = new FileSystem();
+            var fileHandle = fs.openFile('conductstorage');
+            var fileReader = new FileReader(fileHandle);
+
+            fileReader.onload = function(event) {
+                var lines = event.target.result.split('\n');
+                for (var i = 0; i < lines.length; i++) {
+                    var line = lines[i];
+                    var parts = line.split(':');
+                    if (parts.length === 2 && parts[0] === studentUsername) {
+                        var conductLevel = parts[1];
+                        document.getElementById('conductLevel').textContent = conductLevel;
+                        return; // Exit the loop once conduct level is found
+                    }
+                }
+                document.getElementById('conductLevel').textContent = 'No conduct level set';
+            };
+
+            fileReader.onerror = function() {
+                document.getElementById('conductLevel').textContent = 'Error reading conduct level';
+            };
+
+            fileReader.readAsText();
+        }
+
+        // Call the function when the page loads
+        getStudentConductLevel();
+    </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<h1>ATTENDANCE</h1>
+<title>OSMAP | Attendance</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <label for="classSelect">Select the class</label>
+    <select id="classSelect" onchange="redirectToPage()">
+        <option value="">Select</option>
+        <option value="9A">9A</option>
+        <option value="9B">9B</option>
+    </select>
+
+    <script>
+        function redirectToPage() {
+            var selectElement = document.getElementById("classSelect");
+            var selectedValue = selectElement.options[selectElement.selectedIndex].value;
+            if (selectedValue === "9A") {
+                window.location.href = "9A_Attendance.html";
+            } else if (selectedValue === "9B") {
+                window.location.href = "9B_Attendance.html";
+            }
+        }
+    </script>
+</body>
+</html>

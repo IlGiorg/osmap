@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSMAP | Teacher</title>
+    <style>
+        /* Left-aligning the content */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            margin-left: 20px; /* Adjust the left margin as needed */
+        }
+        .p1 {
+            font-family: "Sans-Serif", Arial, serif;
+        }
+        .p2 {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .p3 {
+            font-family: "Lucida Console", "Courier New", monospace;
+        }
+        .button-attendance,
+        .button-rewmgmt,
+        .button-conductmgmt {
+            margin-right: 10px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .button-attendance {
+            background-color: #0ac300;
+            color: #fff;
+        }
+        .button-rewmgmt {
+            background-color: #0010c3;
+            color: #fff;
+        }
+        .button-conductmgmt {
+            background-color: #ff0033;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>OSMAP</h1>
+        <h3 class="p1">Choose an action:</h3>
+        <button class="button-attendance" onclick="window.location.href='attendance.html'">Attendance</button>
+        <button class="button-rewmgmt" onclick="window.location.href='rewardslanding.html'">Reward Manager</button>
+        <button class="button-conductmgmt" onclick="window.location.href='conductlanding.html'">Conduct Manager</button>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var sessionId = sessionStorage.getItem('sessionId');
+            if (!sessionId) {
+                alert('You are not authorized to access this page. Redirecting to session error page.');
+                window.location.href = 'sessionerror.html'; // Redirect to the session error page
+            }
+        });
+    </script>
+</body>
+<head>
+
+</head>
+<body>
+    <!-- Your content -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var sessionId = sessionStorage.getItem('sessionId');
+            if (!sessionId) {
+                alert('You are not authorized to access this page. Redirecting to session error page.');
+                window.location.href = 'sessionerror.html'; // Redirect to the session error page
+            }
+        });
+    </script>
+</body>
+</html>
+
