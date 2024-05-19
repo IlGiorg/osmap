@@ -17,7 +17,7 @@
                 var studentUsername = ''; // You need to retrieve the username from sessionStorage
 
                 // Fetch the conduct level data from the JSON file
-                fetch('https://raw.githubusercontent.com/yourusername/yourrepository/main/consequences.json')
+                fetch('https://raw.githubusercontent.com/IlGiorg/osmap/main/conductstorage.json')
                     .then(response => response.json())
                     .then(data => {
                         var conductLevel = findConductLevel(data, studentUsername);
