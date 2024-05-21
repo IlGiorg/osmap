@@ -1,0 +1,17 @@
+{
+    "consequences": [
+        {
+            "studentId": "student1",
+            "consequence": "Detention for 1 hour"
+        },
+        {
+            "studentId": "student2",
+            "consequence": "Written warning"
+        },
+        {
+            "studentId": "student3",
+            "consequence": "Parent-teacher meeting"
+        }
+        // Add more consequences as needed
+    ]
+}
