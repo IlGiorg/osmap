@@ -3,50 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conduct Manager</title>
+    <title>Teacher Landing</title>
 </head>
 <body>
-    <h2>Conduct Manager</h2>
-    <form id="conductForm">
-        <label for="studentId">Student ID:</label>
-        <input type="text" id="studentId" name="studentId" required><br><br>
-        <label for="conductLevel">Conduct Level:</label>
-        <select id="conductLevel" name="conductLevel">
+    <h1>Teacher Landing Page</h1>
+    <form action="student_conduct_check.html" method="get">
+        <label for="level">Select Level:</label>
+        <select id="level" name="level">
+            <option value="L0">L0</option>
             <option value="L1">L1</option>
             <option value="L2">L2</option>
             <option value="L3">L3</option>
-            <!-- Add more conduct levels if needed -->
-        </select><br><br>
-        <input type="submit" value="Submit">
+            <option value="L4">L4</option>
+            <option value="L5">L5</option>
+        </select>
+        <br><br>
+        <label for="studentid">Enter Student ID:</label>
+        <input type="text" id="studentid" name="studentid" required>
+        <br><br>
+        <button type="submit">Submit</button>
     </form>
-
-    <script>
-        document.getElementById('conductForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent the form from submitting
-
-            try {
-                // Get student ID and conduct level from the form
-                var studentId = document.getElementById('studentId').value;
-                var conductLevel = document.getElementById('conductLevel').value;
-
-                // Write to conductstorage file
-                writeToFile(studentId, conductLevel);
-
-                alert('Conduct level set for student ID ' + studentId);
-            } catch (error) {
-                alert('An error occurred: ' + error.message);
-            }
-        });
-
-        function writeToFile(studentId, conductLevel) {
-            var fs = new FileSystem(json);
-            var fileHandle = fs.createFile('conductstorage');
-            var fileWriter = new FileWriter(fileHandle);
-
-            var data = studentId + ':' + conductLevel + '\n';
-            fileWriter.write(data);
-            fileWriter.close();
-        }
-    </script>
 </body>
 </html>
