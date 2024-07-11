@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Conduct Check</title>
+</head>
+<body>
+    <h1>Student Conduct Check</h1>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const studentid = params.get('studentid');
+
+        if (studentid) {
+            fetch('conduct_levels.json')
+                .then(response => response.json())
+                .then(data => {
+                    const level = data[studentid];
+                    if (level) {
+                        document.write(`<p>Student ID: ${studentid}</p>`);
+                        document.write(`<p>Conduct Level: ${level}</p>`);
+                    } else {
+                        document.write('<p>PUT SOMETHING HERE GIORGIO</p>');
+                    }
+                });
+        } else {
+            document.write('<p>PUT SOMETHING HERE GIORGIO</p>');
+        }
+    </script>
+</body>
+</html>
