@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OSMAP | Student Login Page</title>
     <style>
-        /* Centering the form on the page using flexbox */
         body {
             display: flex;
             justify-content: center;
@@ -13,42 +12,41 @@
             height: 100vh;
             margin: 0;
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0; /* Optional: add a light background color */
+            background-color: #f0f0f0;
         }
         form {
             border: 1px solid #ccc;
-            padding: 40px; /* Increased padding for a larger form */
+            padding: 40px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             background: #fff;
-            width: 400px; /* Increased width for a larger form */
+            width: 400px;
         }
         h2 {
-            text-align: center; /* Center the heading */
+            text-align: center;
         }
         label, input {
             display: block;
             width: 100%;
-            margin-bottom: 20px; /* Increased margin for better spacing */
+            margin-bottom: 20px;
         }
         input[type="text"], input[type="password"] {
-            padding: 10px; /* Added padding for better appearance */
-            font-size: 16px; /* Increased font size */
+            padding: 10px;
+            font-size: 16px;
         }
         input[type="submit"] {
-            width: 100%; /* Full-width button */
+            width: 100%;
             padding: 10px 20px;
             background-color: #007bff;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 16px; /* Increased font size */
+            font-size: 16px;
         }
         input[type="submit"]:hover {
             background-color: #0056b3;
         }
-        /* Custom alert dialog styles */
         .custom-alert {
             display: none;
             position: fixed;
@@ -61,11 +59,11 @@
             z-index: 1000;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             text-align: center;
-            border-radius: 10px; /* Rounded corners */
+            border-radius: 10px;
         }
         .custom-alert h3 {
             margin-top: 0;
-            font-family: 'Trebuchet MS', sans-serif; /* Trebuchet font for alert title */
+            font-family: 'Trebuchet MS', sans-serif;
         }
         .custom-alert p {
             margin: 10px 0;
@@ -76,7 +74,7 @@
             border: none;
             background-color: #007bff;
             color: white;
-            border-radius: 5px; /* Rounded corners for button */
+            border-radius: 5px;
             cursor: pointer;
         }
         .custom-alert button:hover {
@@ -93,7 +91,7 @@
             z-index: 999;
         }
         .error-text {
-            color: red; /* Red color for error text */
+            color: red;
         }
     </style>
 </head>
@@ -109,7 +107,6 @@
         <input type="submit" value="Login">
     </form>
 
-    <!-- Custom alert dialog -->
     <div class="custom-alert-overlay" id="alertOverlay"></div>
     <div class="custom-alert" id="alertBox">
         <h3>STUDENT PORTAL LOGIN</h3>
@@ -122,32 +119,27 @@
             event.preventDefault(); // Prevent the form from submitting
 
             try {
-                // Get the entered username and password
                 var username = document.getElementById('username').value;
                 var password = document.getElementById('password').value;
 
-                // Define credentials as an array of objects
                 var credentials = [
                     { username: 'student1', password: 'password1' },
                     { username: 'student2', password: 'password2' },
-                    { username: 'Giorgio Valdman', password: 'a' }, // New credentials
-                    // Add more credentials as needed
+                    { username: 'Giorgio Valdman', password: 'a' },
                     { username: 'a', password: 'a' },
                 ];
 
-                // Check if entered credentials match any in the credentials array
                 var isAuthenticated = credentials.some(function(credential) {
                     return credential.username === username && credential.password === password;
                 });
 
-                // Display appropriate message based on authentication result
                 if (isAuthenticated) {
                     var sessionId = generateSessionId();
-                    sessionStorage.setItem('sessionId', sessionId); // Store session ID in sessionStorage
+                    sessionStorage.setItem('sessionId', sessionId);
                     showAlert('Login successful!');
-                    // Redirect to landing page
+
                     setTimeout(function() {
-                        window.location.href = 'landingpage_student.html';
+                        window.location.href = 'student_conduct_check.html?studentid=' + encodeURIComponent(username);
                     }, 1000);
                 } else {
                     showAlert('Incorrect credentials', true);
@@ -174,6 +166,5 @@
             document.getElementById('alertBox').style.display = 'none';
         }
     </script>
-    
 </body>
 </html>
