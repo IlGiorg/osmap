@@ -3,53 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Portal</title>
+    <title>Student Conduct Check</title>
 </head>
 <body>
-    <h2>Student Portal</h2>
-    <h3>Your Conduct Level:</h3>
-    <p id="conductLevel"></p>
-
+    <h1>Student Conduct Check</h1>
     <script>
-        // Function to retrieve conduct level based on student credentials
-        function getStudentConductLevel() {
-            try {
-                var studentUsername = ''; // You need to retrieve the username from sessionStorage
+        // Get URL parameters
+        const params = new URLSearchParams(window.location.search);
+        const level = params.get('level');
+        const studentid = params.get('studentid');
 
-                // Fetch the conduct level data from the JSON file
-                fetch('https://raw.githubusercontent.com/IlGiorg/osmap/main/conductstorage.json')
-                    .then(response => response.json())
-                    .then(data => {
-                        var conductLevel = findConductLevel(data, studentUsername);
-                        if (conductLevel) {
-                            document.getElementById('conductLevel').textContent = conductLevel;
-                        } else {
-                            document.getElementById('conductLevel').textContent = 'No conduct level set';
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error fetching consequences data:', error);
-                        document.getElementById('conductLevel').textContent = 'Error fetching conduct level';
-                    });
-            } catch (error) {
-                console.error('Error retrieving conduct level:', error);
-                document.getElementById('conductLevel').textContent = 'Error retrieving conduct level';
-            }
+        // Display student conduct level or default message
+        if (level && studentid) {
+            document.write(`<p>Student ID: ${studentid}</p>`);
+            document.write(`<p>Conduct Level: ${level}</p>`);
+        } else {
+            document.write('<p>PUT SOMETHING HERE GIORGIO</p>');
         }
-
-        // Function to find conduct level based on student username
-        function findConductLevel(data, studentUsername) {
-            var consequences = data.consequences;
-            for (var i = 0; i < consequences.length; i++) {
-                if (consequences[i].studentId === studentUsername) {
-                    return consequences[i].consequence;
-                }
-            }
-            return null; // Return null if conduct level not found
-        }
-
-        // Call the function when the page loads
-        getStudentConductLevel();
     </script>
 </body>
 </html>
