@@ -96,7 +96,7 @@
     </style>
 </head>
 <body>
-    <form id="loginForm" action="#" method="post">
+    <form id="loginForm" action="#" method="get">
         <h2>Student Portal Login</h2>
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required>
@@ -116,7 +116,7 @@
 
     <script>
         document.getElementById('loginForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent the form from submitting
+            event.preventDefault();
 
             try {
                 var username = document.getElementById('username').value;
@@ -124,4 +124,47 @@
 
                 var credentials = [
                     { username: 'student1', password: 'password1' },
-                    {
+                    { username: 'student2', password: 'password2' },
+                    { username: 'Giorgio Valdman', password: 'a' },
+                    { username: 'a', password: 'a' }
+                ];
+
+                var isAuthenticated = credentials.some(function(credential) {
+                    return credential.username === username && credential.password === password;
+                });
+
+                if (isAuthenticated) {
+                    var sessionId = generateSessionId();
+                    sessionStorage.setItem('sessionId', sessionId);
+                    showAlert('Login successful!');
+                    setTimeout(function() {
+                        window.location.href = 'student_conduct_check.html?studentid=' + encodeURIComponent(username);
+                    }, 1000);
+                } else {
+                    showAlert('Incorrect credentials', true);
+                }
+            } catch (error) {
+                showAlert('Unknown error');
+            }
+        });
+
+        function generateSessionId() {
+            return 'session_' + Math.random().toString(36).substr(2, 9);
+        }
+
+        function showAlert(message, isError = false) {
+            var alertMessageElement = document.getElementById('alertMessage');
+            alertMessageElement.innerText = message;
+            alertMessageElement.className = isError ? 'error-text' : '';
+            document.getElementById('alertOverlay').style.display = 'block';
+            document.getElementById('alertBox').style.display = 'block';
+        }
+
+        function closeAlert() {
+            document.getElementById('alertOverlay').style.display = 'none';
+            document.getElementById('alertBox').style.display = 'none';
+        }
+    </script>
+    
+</body>
+</html>
