@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Teacher Landing Page</h1>
-    <form id="teacherForm" action="update_conduct.html" method="get">
+    <form id="teacherForm">
         <label for="level">Select Level:</label>
         <select id="level" name="level">
             <option value="L0">L0</option>
@@ -24,5 +24,40 @@
         <br><br>
         <button type="submit">Submit</button>
     </form>
+
+    <script>
+        document.getElementById('teacherForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const level = document.getElementById('level').value;
+            const studentid = document.getElementById('studentid').value;
+
+            if (level && studentid) {
+                fetch('update_conduct.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ studentid: studentid, level: level })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        document.body.innerHTML = '<p>Conduct level updated successfully!</p>';
+                    } else {
+                        document.body.innerHTML = '<p>Failed to update conduct level.</p>';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.body.innerHTML = '<p>An error occurred.</p>';
+                    alert("An error occured");
+                });
+            } else {
+                document.body.innerHTML = '<p>Invalid parameters.</p>';
+                alert("An error occured");
+            }
+        });
+    </script>
 </body>
 </html>
