@@ -11,9 +11,14 @@
             background-color: #f0f0f0;
             margin: 0;
             padding: 0;
+            display: flex;
+            justify-content: center; /* Center the container horizontally */
+            align-items: center; /* Center the container vertically */
+            height: 100vh; /* Full viewport height */
         }
         .container {
             margin-left: 20px; /* Adjust the left margin as needed */
+            text-align: center; /* Center the text */
         }
         .p1 {
             font-family: "Sans-Serif", Arial, serif;
@@ -24,14 +29,13 @@
         .p3 {
             font-family: "Lucida Console", "Courier New", monospace;
         }
-        .button-attendance,
-        .button-rewmgmt,
-        .button-conductmgmt {
-            margin-right: 10px;
+        .button {
+            margin: 10px 0; /* Vertical margin between buttons */
             padding: 10px 20px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            width: 200px; /* Fixed width for consistency */
         }
         .button-attendance {
             background-color: #0ac300;
@@ -51,9 +55,9 @@
     <div class="container">
         <h1>OSMAP</h1>
         <h3 class="p1">Choose an action:</h3>
-        <button class="button-attendance" onclick="window.location.href='attendance.html'">Attendance</button>
-        <button class="button-rewmgmt" onclick="window.location.href='rewardslanding.html'">Reward Manager</button>
-        <button class="button-conductmgmt" onclick="window.location.href='conductlanding.html'">Conduct Manager</button>
+        <button class="button button-attendance" onclick="window.location.href='attendance.html'">Attendance</button>
+        <button class="button button-rewmgmt" onclick="window.location.href='rewardslanding.html'">Reward Manager</button>
+        <button class="button button-conductmgmt" onclick="window.location.href='conductlanding.html'">Conduct Manager</button>
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -65,20 +69,4 @@
         });
     </script>
 </body>
-<head>
-
-</head>
-<body>
-    <!-- Your content -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var sessionId = sessionStorage.getItem('sessionId');
-            if (!sessionId) {
-                alert('You are not authorized to access this page. Redirecting to session error page.');
-                window.location.href = 'sessionerror.html'; // Redirect to the session error page
-            }
-        });
-    </script>
-</body>
 </html>
-
