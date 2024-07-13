@@ -121,40 +121,35 @@
         document.getElementById('loginForm').addEventListener('submit', function(event) {
             event.preventDefault(); // Prevent the form from submitting
 
-            try {
-                // Get the entered username and password
-                var username = document.getElementById('username').value;
-                var password = document.getElementById('password').value;
+            // Get the entered username and password
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
 
-                // Define credentials as an array of objects
-                var credentials = [
-                    { username: 'F.Williamson', password: 'iloveRaz' },
-                    { username: 'user2', password: 'password2' },
-                    { username: 'Giorgio Valdman', password: 'a' }, // New credentials
-                    // Add more credentials as needed
-                    { username: 'a', password: 'a' },
-                ];
+            // Fetch credentials from the JSON file
+            fetch('teachers_cred.json')
+                .then(response => response.json())
+                .then(credentials => {
+                    // Check if entered credentials match any in the credentials array
+                    var isAuthenticated = credentials.some(function(credential) {
+                        return credential.username === username && credential.password === password;
+                    });
 
-                // Check if entered credentials match any in the credentials array
-                var isAuthenticated = credentials.some(function(credential) {
-                    return credential.username === username && credential.password === password;
+                    // Display appropriate message based on authentication result
+                    if (isAuthenticated) {
+                        var sessionId = generateSessionId();
+                        sessionStorage.setItem('sessionId', sessionId); // Store session ID in sessionStorage
+                        showAlert('Login successful!');
+                        // Redirect to landing page
+                        setTimeout(function() {
+                            window.location.href = 'landingpage_teacher.html';
+                        }, 1000);
+                    } else {
+                        showAlert('Incorrect credentials', true);
+                    }
+                })
+                .catch(error => {
+                    showAlert('Error fetching credentials');
                 });
-
-                // Display appropriate message based on authentication result
-                if (isAuthenticated) {
-                    var sessionId = generateSessionId();
-                    sessionStorage.setItem('sessionId', sessionId); // Store session ID in sessionStorage
-                    showAlert('Login successful!');
-                    // Redirect to landing page
-                    setTimeout(function() {
-                        window.location.href = 'landingpage_teacher.html';
-                    }, 1000);
-                } else {
-                    showAlert('Incorrect credentials', true);
-                }
-            } catch (error) {
-                showAlert('Unknown error');
-            }
         });
 
         function generateSessionId() {
@@ -174,6 +169,5 @@
             document.getElementById('alertBox').style.display = 'none';
         }
     </script>
-    
 </body>
 </html>
