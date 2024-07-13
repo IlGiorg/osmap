@@ -18,14 +18,35 @@
             <option value="L5">L5</option>
         </select>
         <br><br>
-        <label for="studentid">Enter Student ID:</label>
-        <input type="text" id="studentid" name="studentid" required>
-        <p>Please write student's name and surname all in lower-caps and with no spaces</p>
+        <label for="studentid">Select Student:</label>
+        <select id="studentid" name="studentid" required>
+            <option value="">Select a student</option>
+        </select>
+        <p>Please select the student's username from the dropdown</p>
         <br><br>
         <button type="submit">Submit</button>
     </form>
 
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Fetch the students_cred.json file and populate the student dropdown
+            fetch('students_cred.json')
+                .then(response => response.json())
+                .then(data => {
+                    const studentSelect = document.getElementById('studentid');
+                    data.forEach(student => {
+                        const option = document.createElement('option');
+                        option.value = student.username;
+                        option.textContent = student.username;
+                        studentSelect.appendChild(option);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching student credentials:', error);
+                    alert("An error occurred while fetching student credentials.");
+                });
+        });
+
         document.getElementById('teacherForm').addEventListener('submit', function(event) {
             event.preventDefault();
 
@@ -51,11 +72,11 @@
                 .catch(error => {
                     console.error('Error:', error);
                     document.body.innerHTML = '<p>An error occurred.</p>';
-                    alert("An error occured");
+                    alert("An error occurred");
                 });
             } else {
                 document.body.innerHTML = '<p>Invalid parameters.</p>';
-                alert("An error occured");
+                alert("Invalid parameters");
             }
         });
     </script>
