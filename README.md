@@ -12,7 +12,7 @@ An Open-Source **Online School Management & Administration Platform**
 It Includes <ins>everything!</ins> from Homework to Accounting! 
 And it's all **100% customizable!**
 
-Don't need a feature? **Remove it!**
+Don't need a feature? **Remove it!**\
 Need a new one not included? **Make it!**
 
 That's the beauty of *Open-Source* projects.
