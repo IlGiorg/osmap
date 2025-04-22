@@ -46,24 +46,37 @@ Rewarding is also importnt, and to let students know they've done good work, **H
 > If a school doesn't have _Academic Houses_, they can be renamed just as "Positive Points".
 
 ### Grades
->[!IMPORTANT]
->This feature has not been implemented in this repository. Check out [OmniSchool](https://github.com/IlGiorg/OmniSchool) to use this feature. 
+>[!WARNING]
+>This feature has not been implemented in this repository. Check out [OmniSchool](https://github.com/IlGiorg/OmniSchool) to use this feature.
+
 Teachers can give grades for assignments and have an overview of their class and single students.\
 Teachers can then give a "Period Grade" that will automatically go into the system and the into the student's report card.
 
 ### Homework
->[!IMPORTANT]
->This feature has not been implemented in this repository. Check out [OmniSchool](https://github.com/IlGiorg/OmniSchool) to use this feature. 
+>[!WARNING]
+>This feature has not been implemented in this repository. Check out [OmniSchool](https://github.com/IlGiorg/OmniSchool) to use this feature.
+>
 Teachers can assign homework easily to a class and multiple classes at once. They can upload files as resources to the assignment to help students.
 
 ### Students Database
->[!IMPORTANT]
+>[!WARNING]
 >This feature has not been implemented in this repository. Check out [OmniSchool](https://github.com/IlGiorg/OmniSchool) to use this feature. 
 
 Teachers can view all of the students in the database, view per class or just one student.\
 We're planning to have to option to add a student's picture in the database, but it's not a feature currently implemented.
 
 ## Admin Panel
->[!IMPORTANT]
->This feature has not been implemented in this repository. Check out [OmniSchool](https://github.com/IlGiorg/OmniSchool) to use this feature. 
+>[!WARNING]
+>This feature has not been implemented in this repository. Check out [OmniSchool](https://github.com/IlGiorg/OmniSchool) to use this feature.
+
+From the Admin Panel, all the *Behind the Scenes* happens.\
+Students and Teachers can be created and deleted and raw SQL code is executed.
+To ensure an added layer of security, a second layer of authentication is required to access the Admin Panel and an additional password to execute raw SQL code.
+Other features are coming soon to the Admin Panel.
+
+## Accounting
+## Human Resources
+## Reception
+## Events
+
 
